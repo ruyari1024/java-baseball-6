@@ -1,5 +1,7 @@
 package baseball.Domain;
 
+import camp.nextstep.edu.missionutils.Console;
+
 import java.util.HashSet;
 import java.util.stream.Stream;
 
@@ -11,13 +13,16 @@ public class User {
         System.out.print("숫자를 입력해 주세요 : ");
         String userInput = readLine();
         if(!userInputValidation(userInput)){
-            invalidValue();
+            throw new IllegalArgumentException();
         }
+        Console.close();
         return Stream.of(userInput.split("")).mapToInt(Integer::parseInt).toArray();
     }
     public String gameContinueInput(){
         System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-        return readLine();
+        String userInput = readLine();
+        Console.close();
+        return userInput;
     }
 
     public Boolean userInputValidation(String userInput){
@@ -41,9 +46,5 @@ public class User {
         }
 
         return true;
-    }
-
-    public void invalidValue(){
-        throw new IllegalArgumentException();
     }
 }
